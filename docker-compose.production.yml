@@ -7,7 +7,7 @@ volumes:
 
 services:
   db:
-    image: postgres:13
+    image: postgres:13.10
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
@@ -29,7 +29,7 @@ services:
     image: matrosovmn/kittygram_gateway
     env_file: .env
     volumes:
-      - static:/static
+      - static:/staticfiles
       - media:/media
     ports:
       - 9000:80
