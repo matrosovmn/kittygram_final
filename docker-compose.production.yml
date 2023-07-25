@@ -1,16 +1,16 @@
 version: '3'
 
 volumes:
-  pg_data:
+  pg_data_production:
   static:
   media:
 
 services:
-  db:
+  db_kitty:
     image: postgres:13.10
     env_file: .env
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data_production:/var/lib/postgresql/data
   backend:
     image: matrosovmn/kittygram_backend
     env_file: .env
@@ -18,7 +18,7 @@ services:
       - static:/backend_static
       - media:/app/media
     depends_on:
-      - db
+      - db_kitty
   frontend:
     image: matrosovmn/kittygram_frontend
     env_file: .env

@@ -1,4 +1,4 @@
-name: Main Taski workflow
+name: Main Kittygram workflow
 
 on:
   push:
@@ -13,9 +13,9 @@ jobs:
       postgres:
         image: postgres:13.10
         env:
-          POSTGRES_USER: django_user
-          POSTGRES_PASSWORD: django_password
-          POSTGRES_DB: django_db
+          POSTGRES_USER: kitty_user
+          POSTGRES_PASSWORD: superpassword2
+          POSTGRES_DB: kitty_app
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -35,9 +35,9 @@ jobs:
 
       - name: Test with flake8 and django tests
         env:
-          POSTGRES_USER: django_user
-          POSTGRES_PASSWORD: django_password
-          POSTGRES_DB: django_db
+          POSTGRES_USER: kitty_user
+          POSTGRES_PASSWORD: superpassword2
+          POSTGRES_DB: kitty_app
           DB_HOST: 127.0.0.1
           DB_PORT: 5432
         run: |
@@ -147,7 +147,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Copy docker-compose.yml via ssh
+    - name: Copy docker-compose.production.yml via ssh
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
